@@ -4,4 +4,4 @@ install:
   - python setup.py install
   - npm install -g tap-spec
 script: 
-  ./test/tsht
+  ./test/tsht|tap-spec
