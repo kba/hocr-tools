@@ -2,5 +2,7 @@ language: python
 install:
   - pip install -r requirements.txt
   - python setup.py install
+  - pip install pep8
 script: 
-  ./test/tsht
+  - ./test/tsht
+  - pep8 hocr-*
