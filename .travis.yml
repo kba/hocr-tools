@@ -5,4 +5,4 @@ install:
   - pip install pep8
 script: 
   - ./test/tsht
-  - pep8 hocr-*
+  - pep8 hocr-* setup.py; true
