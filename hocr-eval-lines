@@ -70,7 +70,7 @@ optlist,args = getopt.getopt(sys.argv[1:],"v")
 verbose = (assoc('-v',optlist)=='')
 truth_lines = open(args[0]).read().split('\n')
 actual_doc = html.fromstring(open(args[1]).read())
-actual_lines = [get_text(node) for node in xquery("//*[@class='ocr_line']",actual_doc)]
+actual_lines = [get_text(node) for node in actual_doc.xpath("//*[@class='ocr_line']")]
 
 truth_lines = [normalize(s) for s in truth_lines]
 truth_lines = [s for s in truth_lines if s!=""]
