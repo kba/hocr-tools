@@ -1,6 +1,6 @@
 # hocr-tools
 
-[![Build Status](https://travis-ci.org/tmbdev/hocr-tools.svg?branch=master)](https://travis-ci.org/tmbdev/hocr-tools)
+[![Build Status](https://travis-ci.org/UB-Mannheim/hocr-tools.svg?branch=master)](https://travis-ci.org/tmbdev/hocr-tools)
 
 
 * [About](#about)
