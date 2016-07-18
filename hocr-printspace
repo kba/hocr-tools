@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+
+# Find the print space of a page, without margin notes
+
+import sys,os,string,re
+from lxml import html
+import argparse
+
+def get_prop(node,name):
+    title = node.get('title')
+    props = title.split(';')
+    for prop in props:
+        (key,args) = prop.split(None,1)
+        if key==name: return args
+
+def get_text(node):
+    textnodes = node.xpath(".//text()")
+    s = string.join([text for text in textnodes])
+    return re.sub(r'\s+',' ',s)
+
+def get_bbox(node):
+    bbox = get_prop(node,'bbox')
+    if not bbox: return None
+    return tuple([int(x) / NORMALIZE_AMOUNT * NORMALIZE_AMOUNT for x in bbox.split()])
+
+def guess_lower_boundary(freq, min):
+    candidates = sorted(freq, key=freq.get, reverse=True)
+    return [v for v in candidates if v >= min][0]
+
+parser = argparse.ArgumentParser(description="Find print space of a page")
+parser.add_argument("-n","--normalize_amount",type=int,default=10,
+                    help="Amount to normalize coordinates with, default: %(default)s")
+parser.add_argument("-D","--doublepage",default=False,action="store_true",
+                    help="Whether pages are single or double, default: %(default)s")
+parser.add_argument("hocrfile", help="hOCR file to detect print space in")
+args = parser.parse_args()
+NORMALIZE_AMOUNT = args.normalize_amount
+
+stream = open(args.hocrfile)
+doc = html.fromstring(stream.read())
+pages = doc.xpath("//*[@class='ocr_page']")
+
+for page in pages:
+    print('Page "%s"'%page.get('title'))
+    lines = page.xpath("//*[@class='ocr_line']")
+    coord_freq = [{}, {}, {}, {}]
+    for line in lines:
+        coords = get_bbox(line)
+        for pos in range(0,4):
+            if not coords[pos] in coord_freq[pos]:
+                coord_freq[pos][coords[pos]] = 0
+            coord_freq[pos][coords[pos]] += 1
+    if not args.doublepage:
+        print "\tx0: %s"%(guess_lower_boundary(coord_freq[0], 0))
+        print "\ty0: %s"%(sorted(coord_freq[1], key=coord_freq[1].get)[0])
+        print "\tx1: %s"%(guess_lower_boundary(coord_freq[2], 0))
+        print "\ty0: %s"%(sorted(coord_freq[3], key=coord_freq[3].get, reverse=True)[0])
