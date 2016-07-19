@@ -203,7 +203,7 @@ The unit tests are written using the [tsht](https://github.com/kba/tsht) framewo
 e.g.
 
 ```sh
-./test/tsht hocr-pdf/test-hocr-pdf.tsht
+./test/tsht test/hocr-pdf/test-hocr-pdf.tsht
 ```
 
 ### Writing a test
@@ -222,7 +222,7 @@ take a look at the existing [unit tests](./test/).
 plan 1
 
 # write your tests here
-exec_ok "hocr-foo" "-x" "foo" 
+exec_ok "hocr-foo" "-x" "foo"
 
 # remove any temporary files
 # rm some-generated-file
