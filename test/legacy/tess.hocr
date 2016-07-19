@@ -10,7 +10,7 @@
   <meta name='ocr-capabilities' content='ocr_page ocr_carea ocr_par ocr_line ocrx_word'/>
 </head>
 <body>
-  <div class='ocr_page' id='page_1' title='image "alice_1.png"; bbox 0 0 2488 3507; ppageno 0'>
+  <div class='ocr_page' id='page_1' title='image alice_1.png; bbox 0 0 2488 3507; ppageno 0'>
    <div class='ocr_carea' id='block_1_1' title="bbox 470 527 1383 586">
     <p class='ocr_par' dir='ltr' id='par_1_1' title="bbox 470 528 1383 585">
      <span class='ocr_line' id='line_1_1' title="bbox 470 528 1383 585; baseline 0.005 -5"><span class='ocrx_word' id='word_1_1' title='bbox 470 530 499 580; x_wconf 96' lang='eng'>1</span> <span class='ocrx_word' id='word_1_2' title='bbox 588 528 787 581; x_wconf 91' lang='eng' dir='ltr'>Down</span> <span class='ocrx_word' id='word_1_3' title='bbox 817 529 927 582; x_wconf 88' lang='eng' dir='ltr'>the</span> <span class='ocrx_word' id='word_1_4' title='bbox 959 531 1383 585; x_wconf 89' lang='eng' dir='ltr'>Rabbit-Hole</span> 

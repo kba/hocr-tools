@@ -51,7 +51,7 @@ for page in pages:
     lines = page.xpath("//*[@class='%s']"%element)
     lcount = 1
     for line in lines:
-        bbox = [int(x) for x in hocr_lib.get_prop(line,'bbox').split()]
+        bbox = [int(x) for x in get_prop(line,'bbox').split()]
         assert bbox[0]<bbox[2]
         assert bbox[1]<bbox[3]
         lineimage = image.crop(bbox)

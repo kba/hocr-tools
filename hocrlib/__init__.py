@@ -1,8 +1,12 @@
+import re
+
 def get_prop(node,name):
     """
     Return the property in the title of a node
     """
     title = node.get('title')
+    if title is None:
+        return None
     props = title.split(';')
     for prop in props:
         (key,args) = prop.split(None,1)
@@ -13,7 +17,7 @@ def get_text(node):
     Return the text content of a node
     """
     textnodes = node.xpath(".//text()")
-    s = string.join([text for text in textnodes])
+    s = "".join([text for text in textnodes])
     return re.sub(r'\s+',' ',s)
 
 def get_bbox(node, normalize=1):
