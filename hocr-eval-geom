@@ -5,6 +5,7 @@
 
 import sys,os,string,re,getopt
 from lxml import html
+from hocrlib import get_bbox
 
 ### general utilities
 
@@ -14,25 +15,6 @@ def assoc(key,list):
     return None
 
 ### XML processing
-
-def get_text(node):
-    textnodes = node.xpath(".//text()")
-    s = string.join([text for text in textnodes])
-    return re.sub(r'\s+',' ',s)
-
-def get_prop(node,name):
-    title = node.get('title')
-    if not title: return None
-    props = title.split(';')
-    for prop in props:
-        (key,args) = prop.split(None,1)
-        if key==name: return args
-    return None
-
-def get_bbox(node):
-    bbox = get_prop(node,'bbox')
-    if not bbox: return None
-    return tuple([int(x) for x in bbox.split()])
 
 ### rectangle properties
 

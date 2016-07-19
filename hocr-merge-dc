@@ -5,6 +5,7 @@ import xml
 from xml.dom.ext.reader import Sax2
 from xml.dom.ext.reader import HtmlLib
 from xml.xpath import Compile,Evaluate
+from hocrlib import get_text
 
 dcknown = [
     "dc:title","dc:creator","dc:subject",
@@ -13,11 +14,6 @@ dcknown = [
     "dc:identifier","dc:source","dc:language","dc:relation",
     "dc:coverage","dc:rights"
 ]
-
-def get_text(node):
-    textnodes = Evaluate(".//text()",node)
-    s = string.join([node.nodeValue for node in textnodes])
-    return re.sub(r'\s+',' ',s)
 
 if len(sys.argv)<2:
     sys.stderr.write("merge Dublin Core metadata into hOCR header files\n\n")

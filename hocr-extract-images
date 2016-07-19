@@ -5,24 +5,11 @@
 import sys,os,string,re,getopt,codecs
 from PIL import Image
 from lxml import html
+from hocrlib import get_prop,get_text
 
 def assoc(key,list):
     for k,v in list:
         if k==key: return v
-    return None
-
-def get_text(node):
-    textnodes = node.xpath('.//text()')
-    s = string.join([text for text in textnodes])
-    return re.sub(r'\s+',' ',s)
-
-def get_prop(node,name):
-    title = node.get("title")
-    props = title.split(';')
-    for prop in props:
-        (key,args) = prop.split(None,1)
-        args = args.strip('"')
-        if key==name: return args
     return None
 
 def print_usage():
@@ -64,7 +51,7 @@ for page in pages:
     lines = page.xpath("//*[@class='%s']"%element)
     lcount = 1
     for line in lines:
-        bbox = [int(x) for x in get_prop(line,'bbox').split()]
+        bbox = [int(x) for x in hocr_lib.get_prop(line,'bbox').split()]
         assert bbox[0]<bbox[2]
         assert bbox[1]<bbox[3]
         lineimage = image.crop(bbox)

@@ -5,6 +5,7 @@
 import string,re,sys,os,shutil,glob
 import xml.sax
 from PIL import Image
+from hocrlib import get_bbox
 
 usage = """
 ... hocr image_pattern output_prefix
@@ -98,13 +99,6 @@ def write_string(file,text):
     stream = open(file,"w")
     stream.write(text.encode("utf-8"))
     stream.close()
-
-def get_prop(title,name):
-    props = title.split(';')
-    for prop in props:
-        (key,args) = prop.split(None,1)
-        if key==name: return args
-    return None
 
 class docHandler(xml.sax.handler.ContentHandler):
     def __init__(self):

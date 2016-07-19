@@ -4,11 +4,7 @@
 
 import sys,os,string,re
 from lxml import html
-
-def get_text(node):
-    textnodes = node.xpath(".//text()")
-    s = string.join([text for text in textnodes])
-    return re.sub(r'\s+',' ',s)
+from hocrlib import get_text
 
 if len(sys.argv)>1 and (sys.argv[1] == '-h' or sys.argv[1] == '--help'):
     print "Usage:", sys.argv[0], "file.html"
