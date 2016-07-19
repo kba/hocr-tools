@@ -18,9 +18,16 @@ def get_text(node):
     s = string.join([text for text in textnodes])
     return re.sub(r'\s+',' ',s)
 
-if len(sys.argv)<2:
+def print_usage():
     sys.stderr.write("merge Dublin Core metadata into hOCR header files\n\n")
     sys.stderr.write("usage: %s dc.xml hocr.html\n"%sys.argv[0])
+
+if len(sys.argv)>1 and (sys.argv[1] == '-h' or sys.argv[1] == '--help'):
+    print_usage()
+    sys.exit(0)
+
+if len(sys.argv)<2:
+    print_usage()
     sys.exit(1)
 
 dc_doc = etree.fromstring(open(sys.argv[1]).read())
@@ -28,7 +35,7 @@ hocr_doc = html.fromstring(open(sys.argv[2]).read())
 
 ### remove all existing META tags representing Dublin Core metadata
 
-hocr_meta = hocr_doc.xpath("//head")
+hocr_meta = hocr_doc.xpath("//HEAD|//head")
 assert hocr_meta!=[]
 hocr_meta = hocr_meta[0]
 
